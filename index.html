@@ -1,116 +1,340 @@
 <!doctype html>
 <html lang="en">
-
 <head>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>ProWeek Privacy Policy</title>
-  <style>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>ProWeek: A calm plan for a productive week</title>
+<meta name="description" content="ProWeek is a simple weekly planner for iPhone. Add your tasks, rate each 1 to 10, and ProWeek spreads them across your week, most important first.">
+<meta name="theme-color" content="#ffffff" media="(prefers-color-scheme: light)">
+<meta name="theme-color" content="#0e0f12" media="(prefers-color-scheme: dark)">
+<meta property="og:title" content="ProWeek: A calm plan for a productive week">
+<meta property="og:description" content="Plan your week once, then just do today. A minimal, private weekly planner for iPhone.">
+<meta property="og:image" content="https://copypasteninja.github.io/app-todo-mobile/assets/og.jpg">
+<link rel="icon" href="assets/icon.png">
+<link rel="apple-touch-icon" href="assets/apple-touch-icon.png">
+<style>
+  :root {
+    --paper: #ffffff; --surface: #f7f7f8; --card: #ffffff; --line: #ebebee;
+    --ink: #1d1d22; --soft: #6e6e78; --accent: #4b57d6; --accent-tint: rgba(75, 87, 214, .08);
+    --wash: #eceefc; --bezel: #111114; --shadow: 0 30px 60px -20px rgba(29, 29, 58, .22);
+  }
+  @media (prefers-color-scheme: dark) {
     :root {
-      --paper: #fff;
-      --ink: #1d1d22;
-      --soft: #6e6e78;
-      --accent: #4b57d6;
-      --line: #ebebee;
+      --paper: #0e0f12; --surface: #15161a; --card: #1c1d22; --line: #2a2b31;
+      --ink: #f2f2f4; --soft: #9a9aa4; --accent: #8a94ff; --accent-tint: rgba(138, 148, 255, .1);
+      --wash: #1a1c2c; --bezel: #000; --shadow: 0 30px 60px -20px rgba(0, 0, 0, .6);
     }
+  }
+  * { box-sizing: border-box; }
+  html { scroll-behavior: smooth; }
+  body {
+    margin: 0; background: var(--paper); color: var(--ink);
+    font: 17px/1.55 -apple-system, BlinkMacSystemFont, "SF Pro Text", "Helvetica Neue", Arial, sans-serif;
+    -webkit-font-smoothing: antialiased;
+  }
+  a { color: var(--accent); text-decoration: none; }
+  img { display: block; max-width: 100%; }
+  .wrap { max-width: 1120px; margin: 0 auto; padding: 0 20px; }
 
-    @media (prefers-color-scheme: dark) {
-      :root {
-        --paper: #0e0f12;
-        --ink: #f2f2f4;
-        --soft: #9a9aa4;
-        --accent: #8a94ff;
-        --line: #2a2b31;
-      }
-    }
+  /* Nav: a glass bar like iOS */
+  nav {
+    position: sticky; top: 0; z-index: 10;
+    background: color-mix(in srgb, var(--paper) 72%, transparent);
+    backdrop-filter: saturate(180%) blur(20px); -webkit-backdrop-filter: saturate(180%) blur(20px);
+    border-bottom: 1px solid var(--line);
+  }
+  nav .wrap { display: flex; align-items: center; justify-content: space-between; height: 60px; }
+  .brand { display: flex; align-items: center; gap: 10px; color: var(--ink); font-weight: 600; font-size: 18px; letter-spacing: -.2px; }
+  .brand img { width: 30px; height: 30px; border-radius: 7px; }
+  nav .links { display: flex; gap: 24px; font-size: 15px; }
+  nav .links a { color: var(--soft); }
+  nav .links a:hover { color: var(--ink); }
 
-    body {
-      margin: 0;
-      background: var(--paper);
-      color: var(--ink);
-      font: 17px/1.6 -apple-system, BlinkMacSystemFont, "Helvetica Neue", Arial, sans-serif;
-    }
+  /* Hero */
+  .hero { background: linear-gradient(var(--wash), var(--paper) 70%); padding: 72px 0 40px; text-align: center; overflow: hidden; }
+  .eyebrow { display: inline-block; font-size: 14px; font-weight: 600; color: var(--accent); background: var(--accent-tint); padding: 6px 14px; border-radius: 99px; }
+  h1 { font-size: clamp(40px, 7vw, 72px); line-height: 1.04; letter-spacing: -.035em; margin: 20px auto 18px; max-width: 12ch; }
+  .lede { font-size: clamp(18px, 2.2vw, 21px); color: var(--soft); max-width: 34em; margin: 0 auto 32px; }
+  .cta { display: flex; gap: 12px; justify-content: center; flex-wrap: wrap; }
+  .button {
+    display: inline-flex; align-items: center; gap: 8px; height: 50px; padding: 0 24px; border-radius: 99px;
+    font-size: 16px; font-weight: 600; transition: transform .2s, background .2s;
+  }
+  .button.primary { background: var(--ink); color: var(--paper); }
+  .button.secondary { background: var(--card); color: var(--ink); border: 1px solid var(--line); }
+  .button:hover { transform: translateY(-1px); }
+  .note { font-size: 14px; color: var(--soft); margin-top: 14px; }
 
-    main {
-      max-width: 680px;
-      margin: 0 auto;
-      padding: 56px 20px 80px;
-    }
+  /* Phones */
+  .phone {
+    position: relative; aspect-ratio: 1206 / 2622; border-radius: 15% / 7%;
+    background: var(--bezel); padding: 1.6%; box-shadow: var(--shadow);
+  }
+  .phone img, .phone picture { width: 100%; height: 100%; border-radius: 14% / 6.5%; overflow: hidden; }
+  .phone img { object-fit: cover; }
+  .hero-phones { display: flex; justify-content: center; align-items: flex-end; gap: 3%; margin-top: 64px; }
+  .hero-phones .phone { width: min(30%, 300px); }
+  .hero-phones .phone.side { width: min(26%, 260px); margin-bottom: 24px; opacity: .96; }
 
-    h1 {
-      font-size: 34px;
-      line-height: 1.2;
-      letter-spacing: -0.5px;
-      margin: 0 0 6px;
-    }
+  /* Sections */
+  section { padding: 104px 0; }
+  .section-head { text-align: center; max-width: 640px; margin: 0 auto 56px; }
+  h2 { font-size: clamp(32px, 4.6vw, 48px); line-height: 1.08; letter-spacing: -.03em; margin: 0 0 14px; }
+  .section-head p { color: var(--soft); font-size: 19px; margin: 0; }
 
-    h2 {
-      font-size: 20px;
-      margin: 36px 0 8px;
-    }
+  .steps { display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; }
+  .card { background: var(--card); border: 1px solid var(--line); border-radius: 24px; padding: 28px; }
+  .step-num {
+    width: 36px; height: 36px; border-radius: 50%; display: grid; place-items: center;
+    background: var(--accent-tint); color: var(--accent); font-weight: 700; font-size: 16px; margin-bottom: 18px;
+  }
+  .card h3 { font-size: 21px; letter-spacing: -.01em; margin: 0 0 8px; }
+  .card p { color: var(--soft); margin: 0; }
 
-    .date {
-      color: var(--soft);
-      margin: 0 0 32px;
-      padding-bottom: 24px;
-      border-bottom: 1px solid var(--line);
-    }
+  .feature { display: grid; grid-template-columns: 1fr 1fr; gap: 64px; align-items: center; }
+  .feature + .feature { margin-top: 120px; }
+  .feature.flip .text { order: 2; }
+  .feature .phone { width: min(320px, 72%); margin: 0 auto; }
+  .feature .text h2 { text-align: left; }
+  .feature .text p { color: var(--soft); font-size: 19px; margin: 0 0 20px; }
+  .ticks { list-style: none; padding: 0; margin: 0; }
+  .ticks li { position: relative; padding-left: 32px; margin: 10px 0; }
+  .ticks li::before {
+    content: ""; position: absolute; left: 0; top: 4px; width: 20px; height: 20px; border-radius: 50%;
+    background: var(--accent) url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 20 20'%3E%3Cpath d='M6 10.2l2.6 2.6L14 7.4' fill='none' stroke='white' stroke-width='2.2' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E") center/20px no-repeat;
+  }
 
-    p,
-    li {
-      color: var(--ink);
-    }
+  .grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; }
+  .icon { width: 44px; height: 44px; border-radius: 12px; background: var(--accent-tint); color: var(--accent); display: grid; place-items: center; margin-bottom: 18px; }
+  .icon svg { width: 22px; height: 22px; }
 
-    ul {
-      padding-left: 22px;
-    }
+  .privacy { background: var(--surface); }
+  .privacy .card { max-width: 760px; margin: 0 auto; text-align: center; padding: 56px 32px; }
+  .privacy .shield { width: 64px; height: 64px; border-radius: 18px; margin: 0 auto 24px; background: var(--accent); color: #fff; display: grid; place-items: center; }
+  .privacy .shield svg { width: 30px; height: 30px; }
+  .privacy p { font-size: 19px; max-width: 32em; margin: 0 auto 24px; }
+  .pills { display: flex; flex-wrap: wrap; gap: 10px; justify-content: center; margin-bottom: 28px; }
+  .pills span { font-size: 14px; font-weight: 600; padding: 8px 14px; border-radius: 99px; background: var(--paper); border: 1px solid var(--line); }
 
-    a {
-      color: var(--accent);
-    }
-  </style>
+  .closing { text-align: center; }
+  .closing img { width: 96px; height: 96px; border-radius: 22px; margin: 0 auto 28px; box-shadow: var(--shadow); }
+
+  footer { border-top: 1px solid var(--line); padding: 32px 0 48px; color: var(--soft); font-size: 14px; }
+  footer .wrap { display: flex; justify-content: space-between; gap: 16px; flex-wrap: wrap; }
+  footer .links { display: flex; gap: 20px; }
+  footer a { color: var(--soft); }
+  footer a:hover { color: var(--ink); }
+
+  /* Gentle entrance */
+  .reveal { opacity: 0; transform: translateY(24px); transition: opacity .8s ease, transform .8s cubic-bezier(.2, .7, .2, 1); }
+  .reveal.shown { opacity: 1; transform: none; }
+  @media (prefers-reduced-motion: reduce) {
+    html { scroll-behavior: auto; }
+    .reveal { opacity: 1; transform: none; transition: none; }
+  }
+
+  @media (max-width: 820px) {
+    section { padding: 72px 0; }
+    .steps, .grid { grid-template-columns: 1fr; }
+    .feature, .feature.flip { grid-template-columns: 1fr; gap: 40px; }
+    .feature.flip .text { order: 0; }
+    .feature .text h2 { text-align: center; }
+    .feature .text { text-align: center; }
+    .ticks { display: inline-block; text-align: left; }
+    nav .links a.hide-sm { display: none; }
+    .hero-phones .phone.side { display: none; }
+    .hero-phones .phone { width: min(64%, 300px); }
+  }
+</style>
 </head>
-
 <body>
-  <main>
-    <h1>ProWeek Privacy Policy</h1>
-    <p class="date">Effective November 2, 2026</p>
 
-    <p>ProWeek is a weekly planner for iPhone. It was built so your plans stay yours: <strong>ProWeek does not collect,
-        store, share or sell any personal data.</strong></p>
+<nav>
+  <div class="wrap">
+    <a class="brand" href="#"><img src="assets/icon.png" alt="">ProWeek</a>
+    <div class="links">
+      <a class="hide-sm" href="#how">How it works</a>
+      <a class="hide-sm" href="#features">Features</a>
+      <a href="privacy/">Privacy</a>
+    </div>
+  </div>
+</nav>
 
-    <h2>What ProWeek collects</h2>
-    <p>Nothing. ProWeek has no accounts, no analytics, no advertising and no third-party code that tracks you. The app
-      does not connect to the internet and does not send your information to us or to anyone else.</p>
+<header class="hero">
+  <div class="wrap">
+    <span class="eyebrow">Weekly planner for iPhone</span>
+    <h1>A calm plan for a productive week.</h1>
+    <p class="lede">Write down everything you want to get done, rate each task from 1 to 10, and ProWeek spreads it across your week, most important first. Then each day, you just do today.</p>
+    <div class="cta">
+      <span class="button primary" aria-disabled="true">Coming soon to the App Store</span>
+      <a class="button secondary" href="#how">See how it works</a>
+    </div>
+    <p class="note">Free · iPhone · iOS 26</p>
 
-    <h2>Where your data lives</h2>
-    <p>The tasks, priorities and settings you enter are stored only on your iPhone:</p>
-    <ul>
-      <li><strong>In the app.</strong> Your tasks are kept in a database inside ProWeek's storage on your device. The
-        Home Screen widget reads the same data on your device.</li>
-      <li><strong>Daily backups.</strong> ProWeek saves a copy of your tasks to Files › On My iPhone › ProWeek ›
-        Backups. These files stay on your device unless you choose to move or share them.</li>
-      <li><strong>Device backups.</strong> If you back up your iPhone with iCloud or a computer, Apple may include
-        ProWeek's data in that backup. Those backups are managed by Apple under your settings and <a
-          href="https://www.apple.com/legal/privacy/">Apple's privacy policy</a>.</li>
-    </ul>
-    <p>Because we never receive your data, we cannot see, recover or delete it for you. You can delete it at any time by
-      deleting tasks in the app, removing backup files in the Files app, or deleting ProWeek from your iPhone.</p>
+    <div class="hero-phones">
+      <div class="phone side reveal">
+        <picture><source srcset="assets/dark-week.webp" media="(prefers-color-scheme: dark)"><img src="assets/week.webp" alt="The Week screen, with unplanned tasks and a Spread across the week button"></picture>
+      </div>
+      <div class="phone reveal">
+        <picture><source srcset="assets/dark-today.webp" media="(prefers-color-scheme: dark)"><img src="assets/today.webp" alt="The Today screen, listing Thursday's tasks sorted by priority"></picture>
+      </div>
+      <div class="phone side reveal">
+        <picture><source srcset="assets/dark-overview.webp" media="(prefers-color-scheme: dark)"><img src="assets/overview.webp" alt="The Overview screen, showing 62% of the week done and a bar chart by day"></picture>
+      </div>
+    </div>
+  </div>
+</header>
 
-    <h2>Notifications</h2>
-    <p>If you turn on reminders, ProWeek schedules them on your iPhone with Apple's notification system. Reminders are
-      created on your device and are not sent through any server.</p>
+<section id="how">
+  <div class="wrap">
+    <div class="section-head reveal">
+      <h2>Plan once. Then just do today.</h2>
+      <p>Three steps, every week. No projects, no tags, no due times.</p>
+    </div>
+    <div class="steps">
+      <div class="card reveal">
+        <div class="step-num">1</div>
+        <h3>Write it all down</h3>
+        <p>At the start of your week, add everything on your mind. Give each task one number: how much it matters, from 1 to 10.</p>
+      </div>
+      <div class="card reveal">
+        <div class="step-num">2</div>
+        <h3>Spread it across the week</h3>
+        <p>One tap lays your tasks out evenly over your work days, with the highest priorities on the earliest days.</p>
+      </div>
+      <div class="card reveal">
+        <div class="step-num">3</div>
+        <h3>Just do today</h3>
+        <p>Each morning, open ProWeek and see only today's list, sorted by what matters most. Check things off and move on.</p>
+      </div>
+    </div>
+  </div>
+</section>
 
-    <h2>Children</h2>
-    <p>ProWeek collects no data from anyone, including children under 13.</p>
+<section id="features" style="padding-top: 0">
+  <div class="wrap">
+    <div class="feature reveal">
+      <div class="text">
+        <h2>Life happens. Your plan keeps up.</h2>
+        <p>ProWeek handles the reshuffling, so you don't have to.</p>
+        <ul class="ticks">
+          <li>New task mid-week? It lands on your lightest remaining day.</li>
+          <li>Didn't finish something? It moves to your next work day on its own.</li>
+          <li>Plans changed? Re-plan the rest of the week in one tap.</li>
+        </ul>
+      </div>
+      <div class="phone"><picture><source srcset="assets/dark-week.webp" media="(prefers-color-scheme: dark)"><img src="assets/week.webp" alt="The Week screen" loading="lazy"></picture></div>
+    </div>
 
-    <h2>Changes to this policy</h2>
-    <p>If this policy changes, we will update this page and its effective date. If ProWeek ever starts collecting data,
-      this page will say exactly what and why before that version is released.</p>
+    <div class="feature flip reveal">
+      <div class="text">
+        <h2>A fresh start every week.</h2>
+        <p>Pick the day your week resets. Anything left over comes back for a quick review.</p>
+        <ul class="ticks">
+          <li>Keep it, with a new priority if things have changed.</li>
+          <li>Or let it go, and start the week clean.</li>
+        </ul>
+      </div>
+      <div class="phone"><img src="assets/review.webp" alt="The weekly review, asking whether to keep or let go of a task from last week" loading="lazy"></div>
+    </div>
 
-    <h2>Contact</h2>
-    <p>Questions about privacy or ProWeek: <a href="mailto:abdugofir00@gmail.com">abdugofir00@gmail.com</a></p>
-  </main>
+    <div class="feature reveal">
+      <div class="text">
+        <h2>See how far you've come.</h2>
+        <p>Overview shows your week at a glance, without turning it into a spreadsheet.</p>
+        <ul class="ticks">
+          <li>How much of the week is done, and how each day went.</li>
+          <li>Your streak of fully finished days.</li>
+          <li>Look back at any past week.</li>
+        </ul>
+      </div>
+      <div class="phone"><picture><source srcset="assets/dark-overview.webp" media="(prefers-color-scheme: dark)"><img src="assets/overview.webp" alt="The Overview screen" loading="lazy"></picture></div>
+    </div>
+  </div>
+</section>
+
+<section style="padding-top: 0">
+  <div class="wrap">
+    <div class="section-head reveal">
+      <h2>Thoughtful details.</h2>
+      <p>Small things that make it pleasant to come back to every day.</p>
+    </div>
+    <div class="grid">
+      <div class="card reveal">
+        <div class="icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 8a6 6 0 0 0-12 0c0 7-3 9-3 9h18s-3-2-3-9"/><path d="M13.7 21a2 2 0 0 1-3.4 0"/></svg></div>
+        <h3>Gentle reminders</h3>
+        <p>A morning nudge to plan and an evening check-in, at times you choose.</p>
+      </div>
+      <div class="card reveal">
+        <div class="icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="7" height="7" rx="2"/><rect x="14" y="3" width="7" height="7" rx="2"/><rect x="3" y="14" width="18" height="7" rx="2"/></svg></div>
+        <h3>Home Screen widget</h3>
+        <p>Check off today's top tasks without opening the app.</p>
+      </div>
+      <div class="card reveal">
+        <div class="icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 6h10M4 12h7M4 18h4"/><path d="M18 5v14M15 16l3 3 3-3"/></svg></div>
+        <h3>One number for priority</h3>
+        <p>Rate each task 1 to 10. Your list sorts itself by what matters most.</p>
+      </div>
+      <div class="card reveal">
+        <div class="icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12.8A9 9 0 1 1 11.2 3a7 7 0 0 0 9.8 9.8z"/></svg></div>
+        <h3>Light and dark</h3>
+        <p>A quiet, minimal design that looks right at any hour.</p>
+      </div>
+      <div class="card reveal">
+        <div class="icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg></div>
+        <h3>Satisfying check-offs</h3>
+        <p>Subtle haptics and a soft sound when you finish something. Both can be turned off.</p>
+      </div>
+      <div class="card reveal">
+        <div class="icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 7a2 2 0 0 1 2-2h4l2 2h8a2 2 0 0 1 2 2v8a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/></svg></div>
+        <h3>Daily backups</h3>
+        <p>A copy of your tasks is saved to the Files app every day. Restore in a couple of taps.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="privacy">
+  <div class="wrap">
+    <div class="card reveal">
+      <div class="shield"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg></div>
+      <h2>Yours, and only yours.</h2>
+      <p>ProWeek never goes online. Your tasks live on your iPhone, and nothing about you is collected, shared or sold.</p>
+      <div class="pills"><span>No account</span><span>No ads</span><span>No tracking</span><span>No data collected</span></div>
+      <a href="privacy/">Read the privacy policy →</a>
+    </div>
+  </div>
+</section>
+
+<section class="closing">
+  <div class="wrap reveal">
+    <img src="assets/icon.png" alt="ProWeek app icon">
+    <h2>Less noise. More done.</h2>
+    <p class="lede">ProWeek is coming soon to the App Store.</p>
+  </div>
+</section>
+
+<footer>
+  <div class="wrap">
+    <span>© 2026 ProWeek</span>
+    <div class="links">
+      <a href="privacy/">Privacy</a>
+      <a href="mailto:abdugofir00@gmail.com">Contact</a>
+    </div>
+  </div>
+</footer>
+
+<script>
+  // Fade sections in as they scroll into view. Without JS (or with reduced motion) everything just shows.
+  const items = document.querySelectorAll('.reveal');
+  if ('IntersectionObserver' in window && !matchMedia('(prefers-reduced-motion: reduce)').matches) {
+    const io = new IntersectionObserver(entries => entries.forEach(e => {
+      if (e.isIntersecting) { e.target.classList.add('shown'); io.unobserve(e.target); }
+    }), { threshold: 0.12 });
+    items.forEach(el => io.observe(el));
+  } else {
+    items.forEach(el => el.classList.add('shown'));
+  }
+</script>
 </body>
-
 </html>
