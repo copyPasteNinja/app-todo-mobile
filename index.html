@@ -4,11 +4,11 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>ProWeek: A calm plan for a productive week</title>
-<meta name="description" content="ProWeek is a simple weekly planner for iPhone. Add your tasks, rate each 1 to 10, and ProWeek spreads them across your week, most important first.">
+<meta name="description" content="ProWeek is a simple weekly planner for iPhone and Mac. Add your tasks, rate each 1 to 10, and ProWeek spreads them across your week, most important first.">
 <meta name="theme-color" content="#ffffff" media="(prefers-color-scheme: light)">
 <meta name="theme-color" content="#0e0f12" media="(prefers-color-scheme: dark)">
 <meta property="og:title" content="ProWeek: A calm plan for a productive week">
-<meta property="og:description" content="Plan your week once, then just do today. A minimal, private weekly planner for iPhone.">
+<meta property="og:description" content="Plan your week once, then just do today. A minimal, private weekly planner for iPhone and Mac.">
 <meta property="og:image" content="https://copypasteninja.github.io/app-todo-mobile/assets/og.jpg">
 <link rel="icon" href="assets/icon.png">
 <link rel="apple-touch-icon" href="assets/apple-touch-icon.png">
@@ -125,6 +125,16 @@
   footer a { color: var(--soft); }
   footer a:hover { color: var(--ink); }
 
+  /* Mac */
+  .keys { display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; }
+  .keys .card p { margin-top: 6px; }
+  kbd {
+    display: inline-block; min-width: 30px; padding: 4px 9px; margin-right: 4px; border-radius: 8px;
+    font: 600 15px/1.3 -apple-system, BlinkMacSystemFont, "SF Pro Text", sans-serif; text-align: center;
+    color: var(--ink); background: var(--paper); border: 1px solid var(--line); box-shadow: 0 1px 0 var(--line);
+  }
+  .mac .cta { margin-top: 48px; }
+
   /* Gentle entrance */
   .reveal { opacity: 0; transform: translateY(24px); transition: opacity .8s ease, transform .8s cubic-bezier(.2, .7, .2, 1); }
   .reveal.shown { opacity: 1; transform: none; }
@@ -135,7 +145,7 @@
 
   @media (max-width: 820px) {
     section { padding: 72px 0; }
-    .steps, .grid { grid-template-columns: 1fr; }
+    .steps, .grid, .keys { grid-template-columns: 1fr; }
     .feature, .feature.flip { grid-template-columns: 1fr; gap: 40px; }
     .feature.flip .text { order: 0; }
     .feature .text h2 { text-align: center; }
@@ -155,6 +165,7 @@
     <div class="links">
       <a class="hide-sm" href="#how">How it works</a>
       <a class="hide-sm" href="#features">Features</a>
+      <a href="#mac">Mac</a>
       <a href="privacy/">Privacy</a>
     </div>
   </div>
@@ -162,14 +173,14 @@
 
 <header class="hero">
   <div class="wrap">
-    <span class="eyebrow">Weekly planner for iPhone</span>
+    <span class="eyebrow">Weekly planner for iPhone and Mac</span>
     <h1>A calm plan for a productive week.</h1>
     <p class="lede">Write down everything you want to get done, rate each task from 1 to 10, and ProWeek spreads it across your week, most important first. Then each day, you just do today.</p>
     <div class="cta">
-      <span class="button primary" aria-disabled="true">Coming soon to the App Store</span>
-      <a class="button secondary" href="#how">See how it works</a>
+      <a class="button primary" href="download/ProWeek.dmg" download>Download for Mac</a>
+      <span class="button secondary" aria-disabled="true">iPhone: coming soon to the App Store</span>
     </div>
-    <p class="note">Free · iPhone · iOS 26</p>
+    <p class="note">Free · Mac with macOS 26 · iPhone with iOS 26</p>
 
     <div class="hero-phones">
       <div class="phone side reveal">
@@ -288,9 +299,39 @@
       <div class="card reveal">
         <div class="icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 7a2 2 0 0 1 2-2h4l2 2h8a2 2 0 0 1 2 2v8a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/></svg></div>
         <h3>Daily backups</h3>
-        <p>A copy of your tasks is saved to the Files app every day. Restore in a couple of taps.</p>
+        <p>A copy of your tasks is saved every day: in the Files app on iPhone, one click away in Finder on Mac.</p>
       </div>
     </div>
+  </div>
+</section>
+
+<section class="mac" id="mac">
+  <div class="wrap">
+    <div class="section-head reveal">
+      <h2>Made for the Mac, too.</h2>
+      <p>Not a stretched phone app. ProWeek on the Mac is built for the keyboard, with a menu item and a shortcut for everything.</p>
+    </div>
+    <div class="keys">
+      <div class="card reveal">
+        <kbd>⌘</kbd><kbd>N</kbd>
+        <h3 style="margin-top: 18px">Quick add</h3>
+        <p>Add a task from anywhere in the app. Type <strong>!8</strong> to give it priority 8.</p>
+      </div>
+      <div class="card reveal">
+        <kbd>↑</kbd><kbd>↓</kbd><kbd>space</kbd>
+        <h3 style="margin-top: 18px">Today from the keyboard</h3>
+        <p>Move through the list and check things off. Number keys set priority.</p>
+      </div>
+      <div class="card reveal">
+        <kbd>⇧</kbd><kbd>⌘</kbd><kbd>S</kbd>
+        <h3 style="margin-top: 18px">Spread the week</h3>
+        <p>Lay out everything in one stroke, then drag tasks between days on the week board.</p>
+      </div>
+    </div>
+    <div class="cta reveal">
+      <a class="button primary" href="download/ProWeek.dmg" download>Download for Mac</a>
+    </div>
+    <p class="note" style="text-align: center">Free · macOS 26 · Notarized by Apple. Open the file and drag ProWeek to Applications.<br>Turn on iCloud sync in Settings to keep it in step with your iPhone.</p>
   </div>
 </section>
 
@@ -310,7 +351,8 @@
   <div class="wrap reveal">
     <img src="assets/icon.png" alt="ProWeek app icon">
     <h2>Less noise. More done.</h2>
-    <p class="lede">ProWeek is coming soon to the App Store.</p>
+    <p class="lede">ProWeek is available now for Mac, and coming soon to the App Store for iPhone.</p>
+    <div class="cta"><a class="button primary" href="download/ProWeek.dmg" download>Download for Mac</a></div>
   </div>
 </section>
 
